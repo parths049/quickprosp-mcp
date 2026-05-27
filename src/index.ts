@@ -75,7 +75,7 @@ const tools = [
     handler: async (a: { organisationId: string; status?: string }) => {
       const params = new URLSearchParams({ organisationId: a.organisationId });
       if (a.status) params.set('status', a.status);
-      return await qp(`/api/campaigns?${params.toString()}`);
+      return await qp(`/campaigns?${params.toString()}`);
     },
   },
   {
@@ -91,7 +91,7 @@ const tools = [
     },
     schema: z.object({ campaignId: z.string(), organisationId: z.string() }),
     handler: async (a: { campaignId: string; organisationId: string }) => {
-      return await qp(`/api/campaigns/${encodeURIComponent(a.campaignId)}/stats?organisationId=${encodeURIComponent(a.organisationId)}`);
+      return await qp(`/campaigns/${encodeURIComponent(a.campaignId)}/stats?organisationId=${encodeURIComponent(a.organisationId)}`);
     },
   },
   {
@@ -107,7 +107,7 @@ const tools = [
     },
     schema: z.object({ campaignId: z.string(), organisationId: z.string() }),
     handler: async (a: { campaignId: string; organisationId: string }) => {
-      return await qp(`/api/campaigns/${encodeURIComponent(a.campaignId)}/pause?organisationId=${encodeURIComponent(a.organisationId)}`, { method: 'POST' });
+      return await qp(`/campaigns/${encodeURIComponent(a.campaignId)}/pause?organisationId=${encodeURIComponent(a.organisationId)}`, { method: 'POST' });
     },
   },
   {
@@ -123,7 +123,7 @@ const tools = [
     },
     schema: z.object({ campaignId: z.string(), organisationId: z.string() }),
     handler: async (a: { campaignId: string; organisationId: string }) => {
-      return await qp(`/api/campaigns/${encodeURIComponent(a.campaignId)}/resume?organisationId=${encodeURIComponent(a.organisationId)}`, { method: 'POST' });
+      return await qp(`/campaigns/${encodeURIComponent(a.campaignId)}/resume?organisationId=${encodeURIComponent(a.organisationId)}`, { method: 'POST' });
     },
   },
   {
@@ -158,7 +158,7 @@ const tools = [
       if (a.status) params.set('status', a.status);
       params.set('page', String(a.page ?? 0));
       params.set('size', String(a.size ?? 20));
-      return await qp(`/api/contacts/filtered?${params.toString()}`);
+      return await qp(`/contacts/filtered?${params.toString()}`);
     },
   },
   {
@@ -205,7 +205,7 @@ const tools = [
     },
     schema: z.object({ organisationId: z.string() }),
     handler: async (a: { organisationId: string }) => {
-      return await qp(`/api/payments/balance?organisationId=${encodeURIComponent(a.organisationId)}`);
+      return await qp(`/api/payments/credits?organisationId=${encodeURIComponent(a.organisationId)}`);
     },
   },
 ];
