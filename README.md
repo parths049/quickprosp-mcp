@@ -56,7 +56,17 @@ All tools require `organisationId`. Ask Claude *"What's my organization id?"* on
 
 ## Building from source
 
-The package is hosted as a tarball at `https://quickprosp.com/mcp/quickprosp-mcp-server-latest.tgz` — `npx` installs and runs it for you. If you want to inspect or modify the source, download the tarball and extract it:
+The package is hosted as a tarball at `https://quickprosp.com/mcp/quickprosp-mcp-server-latest.tgz` — `npx` installs and runs it for you. If you want to inspect or modify the source:
+
+```sh
+git clone https://github.com/parths049/quickprosp-mcp.git
+cd quickprosp-mcp
+npm install
+npm run build
+QUICKPROSP_API_KEY=qp_live_… node dist/index.js
+```
+
+Or grab the published tarball directly:
 
 ```sh
 curl -O https://quickprosp.com/mcp/quickprosp-mcp-server-latest.tgz

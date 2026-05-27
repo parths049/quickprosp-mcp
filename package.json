@@ -26,5 +26,12 @@
     "node": ">=18"
   },
   "keywords": ["mcp", "model-context-protocol", "quickprosp", "cold-email", "outreach", "claude"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parths049/quickprosp-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/parths049/quickprosp-mcp/issues"
+  },
   "homepage": "https://quickprosp.com/mcp"
 }
