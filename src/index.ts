@@ -52,6 +52,15 @@ function asText(value: unknown): { content: { type: 'text'; text: string }[] } {
 
 const tools = [
   {
+    name: 'whoami',
+    description: 'Returns the authenticated user and the default organisationId (auto-pinned to the API key\'s scope). Call this FIRST — the returned id is what every other tool needs.',
+    inputSchema: { type: 'object', properties: {} },
+    schema: z.object({}),
+    handler: async () => {
+      return await qp('/api/me');
+    },
+  },
+  {
     name: 'list_campaigns',
     description: 'List campaigns for the organization, with status (DRAFT / ACTIVE / PAUSED / COMPLETED), total contacts, and progress.',
     inputSchema: {
