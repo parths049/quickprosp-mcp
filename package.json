@@ -1,0 +1,30 @@
+{
+  "name": "@quickprosp/mcp-server",
+  "version": "0.1.0",
+  "description": "Model Context Protocol server for QuickProsp — lets Claude Desktop, Cursor, and Claude Code drive your outreach: list and pause campaigns, query contacts, check inboxes, and more.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "quickprosp-mcp-server": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["mcp", "model-context-protocol", "quickprosp", "cold-email", "outreach", "claude"],
+  "homepage": "https://quickprosp.com/mcp"
+}
