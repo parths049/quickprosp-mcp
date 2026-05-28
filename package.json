@@ -1,6 +1,6 @@
 {
   "name": "@quickprosp/mcp-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Model Context Protocol server for QuickProsp — lets Claude Desktop, Cursor, and Claude Code drive your outreach: list and pause campaigns, query contacts, check inboxes, and more.",
   "license": "MIT",
   "type": "module",
@@ -11,6 +11,7 @@
   "files": ["dist", "README.md"],
   "scripts": {
     "build": "tsc",
+    "postbuild": "node -e \"const fs=require('fs');const f='dist/index.js';const c=fs.readFileSync(f,'utf8');if(!c.startsWith('#!/usr/bin/env node')){fs.writeFileSync(f,'#!/usr/bin/env node\\n'+c);}fs.chmodSync(f,0o755);\"",
     "start": "node dist/index.js",
     "dev": "tsc --watch"
   },
