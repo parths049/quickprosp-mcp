@@ -208,12 +208,46 @@ const tools = [
       return await qp(`/api/payments/credits?organisationId=${encodeURIComponent(a.organisationId)}`);
     },
   },
+  {
+    name: 'get_org_credit_cap',
+    description: "Get this organisation's monthly email-credit cap and how much it has used this cycle. monthlyAllowance null/0 means no cap (the org draws from the owner's plan pool).",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        organisationId: { type: 'string' },
+      },
+      required: ['organisationId'],
+    },
+    schema: z.object({ organisationId: z.string() }),
+    handler: async (a: { organisationId: string }) => {
+      return await qp(`/org/${encodeURIComponent(a.organisationId)}/monthly-allowance`);
+    },
+  },
+  {
+    name: 'set_org_credit_cap',
+    description: "Set this organisation's monthly email-credit cap (owner/admin only). 0 clears the cap (no limit). Once an org reaches its cap, its sending pauses until next month or the cap is raised.",
+    inputSchema: {
+      type: 'object',
+      properties: {
+        organisationId: { type: 'string' },
+        monthlyAllowance: { type: 'number', description: 'Max emails this org may send per month. 0 = no limit.' },
+      },
+      required: ['organisationId', 'monthlyAllowance'],
+    },
+    schema: z.object({ organisationId: z.string(), monthlyAllowance: z.number().int().min(0) }),
+    handler: async (a: { organisationId: string; monthlyAllowance: number }) => {
+      return await qp(`/org/${encodeURIComponent(a.organisationId)}/monthly-allowance`, {
+        method: 'PUT',
+        body: JSON.stringify({ monthlyAllowance: a.monthlyAllowance }),
+      });
+    },
+  },
 ];
 
 // ─────────────────────────── Server wiring ───────────────────────────
 
 const server = new Server(
-  { name: 'quickprosp-mcp-server', version: '0.1.0' },
+  { name: 'quickprosp-mcp-server', version: '0.2.2' },
   { capabilities: { tools: {} } }
 );
 
@@ -241,4 +275,4 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
-console.error(`QuickProsp MCP server v0.1.0 connected (API: ${API_BASE})`);
+console.error(`QuickProsp MCP server v0.2.2 connected (API: ${API_BASE})`);
